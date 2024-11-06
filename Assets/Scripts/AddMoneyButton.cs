@@ -8,8 +8,9 @@ public class AddMoneyButton : AbstractButton
     [SerializeField] protected Button upgradeButton = default;
     [SerializeField] protected MoneyData moneyData = default;
     [SerializeField] protected GameObject objectPrefab;
+    [SerializeField] protected int addMoney = 1;
+    [SerializeField] protected int upgradeStep = 1;
 
-    protected int addMoney = 1;
     protected GameObject newImage = default;
     protected RectTransform rectTransform = default;
 
@@ -28,7 +29,7 @@ public class AddMoneyButton : AbstractButton
 
         newImage = Instantiate(objectPrefab, Vector3.zero, Quaternion.identity);
         rectTransform = newImage.GetComponent<RectTransform>();
-        rectTransform.SetParent(transform, false); // Устанавливаем родителя
+        rectTransform.SetParent(transform, false);
     }
 
     private void UpdateMoneyText() => currentMoneyText.text = string.Format("{0:N2}", moneyData.Money);
@@ -36,7 +37,7 @@ public class AddMoneyButton : AbstractButton
 
     private void UpgradeMoney()
     {
-        addMoney += 1;
+        addMoney += upgradeStep;
         UpdateAddMoneyText();
     }
 

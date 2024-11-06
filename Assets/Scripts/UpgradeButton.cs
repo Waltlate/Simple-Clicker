@@ -7,10 +7,9 @@ public class UpgradeButton : AbstractButton
     [SerializeField] protected Text levelText = default;
     [SerializeField] protected Text upgradeText = default;
     [SerializeField] protected MoneyData moneyData = default;
-
-    protected int level = 1;
-    protected double costUpgrade = 1;
-    protected double multipleUpgrade = 1.2f;
+    [SerializeField] protected int level = 1;
+    [SerializeField] protected double costUpgrade = 1;
+    [SerializeField] protected double multipleUpgrade = 1.2f;
 
     protected virtual void Start()
     {
