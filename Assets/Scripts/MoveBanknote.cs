@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,15 +5,13 @@ public class MoveBanknote : MonoBehaviour
 {
     [SerializeField] protected float delay = 0.1f;
     [SerializeField] protected float euler = 30f;
-    [SerializeField] protected GameObject topFrontier = default;
-    [SerializeField] protected GameObject bottomFrontier = default;
+    [SerializeField] protected FrontierData frontierData = default;
 
     protected float speed = 0.4f;
+    protected Vector3 direction = Vector3.zero;
 
     protected virtual void OnEnable()
     {
-        topFrontier = GameObject.Find("TopFrontier");
-        bottomFrontier = GameObject.Find("BottomFrontier");
         StartCoroutine(StartMove());
         StartCoroutine(StartRotation());
         StartCoroutine(DestroyObject());
@@ -22,13 +19,9 @@ public class MoveBanknote : MonoBehaviour
 
     private IEnumerator StartMove()
     {
-        Vector3 currentPosition = transform.position;
-        Vector3 direction = new Vector3(UnityEngine.Random.Range(-0.5f, 0.5f), UnityEngine.Random.Range(0.9f, 1f), 0);
-        Debug.Log(direction);
-        Debug.Log(Screen.height / 3f);
-        while (isActiveAndEnabled && transform.position.y < topFrontier.transform.position.y) 
+        direction = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(0.9f, 1f), 0);
+        while (isActiveAndEnabled && transform.position.y < frontierData.TopFrontier)
         {
-            Debug.Log(direction);
             transform.position += direction * speed;
             yield return new WaitForSecondsRealtime(delay);
         }
@@ -49,9 +42,7 @@ public class MoveBanknote : MonoBehaviour
     {
         while (isActiveAndEnabled)
         {
-            Debug.Log(transform.position.y);
-            Debug.Log("destroy");
-            if(transform.position.y < bottomFrontier.transform.position.y)
+            if (transform.position.y < frontierData.BottomFrontier)
             {
                 Destroy(gameObject);
             }

@@ -2,16 +2,17 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public class AbstractButton : MonoBehaviour
+public abstract class AbstractButton : MonoBehaviour
 {
     protected Button button = default;
+
     protected virtual void Awake()
     {
         button = GetComponent<Button>();
         button.onClick.AddListener(OnButtonClick);
     }
 
-    protected virtual void OnButtonClick() => Debug.Log("Button click");
+    protected abstract void OnButtonClick();
 
     protected virtual void OnDestroy() => button.onClick.RemoveListener(OnButtonClick);
 }

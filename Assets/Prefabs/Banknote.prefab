@@ -108,3 +108,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 0.01
   euler: 30
+  frontierData: {fileID: 11400000, guid: 01660330eddc6a745b05715be4c3379a, type: 2}

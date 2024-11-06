@@ -6,7 +6,7 @@ public class UpgradeButton : AbstractButton
 {
     [SerializeField] protected Text levelText = default;
     [SerializeField] protected Text upgradeText = default;
-    [SerializeField] protected MoneyData money = default;
+    [SerializeField] protected MoneyData moneyData = default;
 
     protected int level = 1;
     protected double costUpgrade = 1;
@@ -14,26 +14,21 @@ public class UpgradeButton : AbstractButton
 
     protected virtual void Start()
     {
-        money.onChangeMoney += ChangeStateButton;
+        moneyData.onChangeMoney += ChangeStateButton;
         UpdateText();
         ChangeStateButton();
     }
 
-    protected override void OnButtonClick() {
-        money.DecreaseMoney(costUpgrade);
+    protected override void OnButtonClick()
+    {
+        moneyData.DecreaseMoney(costUpgrade);
         level++;
         costUpgrade = level * Math.Pow(multipleUpgrade, (double)level);
         UpdateText();
         ChangeStateButton();
     }
 
-    private void ChangeStateButton()
-    {
-        if (money.Money < costUpgrade)
-            button.interactable = false;
-        else
-            button.interactable = true;
-    }
+    private void ChangeStateButton() => button.interactable = moneyData.Money < costUpgrade ? false : true;
 
     private void UpdateText()
     {
@@ -44,6 +39,6 @@ public class UpgradeButton : AbstractButton
     protected override void OnDestroy()
     {
         base.OnDestroy();
-        money.onChangeMoney -= ChangeStateButton;
+        moneyData.onChangeMoney -= ChangeStateButton;
     }
 }
