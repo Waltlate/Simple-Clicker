@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8300075650441634179}
   - component: {fileID: 2061601801498772994}
   - component: {fileID: 7770918726797414632}
-  - component: {fileID: 7455217914589023998}
   - component: {fileID: 7084221837305864008}
   m_Layer: 5
   m_Name: Banknote
@@ -78,22 +77,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!54 &7455217914589023998
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3099844901881784252}
-  serializedVersion: 2
-  m_Mass: 10
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &7084221837305864008
 MonoBehaviour:
   m_ObjectHideFlags: 0

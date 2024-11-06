@@ -12,12 +12,11 @@ public class MoveBanknote : MonoBehaviour
 
     protected virtual void OnEnable()
     {
-        StartCoroutine(StartMove());
-        StartCoroutine(StartRotation());
-        StartCoroutine(DestroyObject());
+        StartCoroutine(Move());
+        StartCoroutine(Rotation());
     }
 
-    private IEnumerator StartMove()
+    private IEnumerator Move()
     {
         direction = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(0.9f, 1f), 0);
         while (isActiveAndEnabled && transform.position.y < frontierData.TopFrontier)
@@ -26,27 +25,21 @@ public class MoveBanknote : MonoBehaviour
             yield return new WaitForSecondsRealtime(delay);
         }
 
+        while (isActiveAndEnabled && transform.position.y > frontierData.BottomFrontier)
+        {
+            transform.position += Vector3.down * speed;
+            yield return new WaitForSecondsRealtime(delay);
+        }
+        Destroy(gameObject);
     }
 
-    private IEnumerator StartRotation()
+    private IEnumerator Rotation()
     {
         while (isActiveAndEnabled)
         {
             transform.rotation = Quaternion.Euler(0, 0, euler);
             yield return new WaitForSecondsRealtime(delay);
             euler++;
-        }
-    }
-
-    private IEnumerator DestroyObject()
-    {
-        while (isActiveAndEnabled)
-        {
-            if (transform.position.y < frontierData.BottomFrontier)
-            {
-                Destroy(gameObject);
-            }
-            yield return new WaitForSecondsRealtime(delay);
         }
     }
 }
